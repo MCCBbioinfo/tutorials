@@ -83,9 +83,6 @@ length(ol$peaklist[["peaks1"]])
 # For peaks2:
 length(ol$peaklist[["peaks2"]])
 
-## -----------------------------------------------------------------------------
-identical(ol$peaklist[["peaks1///peaks2"]], ol$mergedPeaks)
-
 ## ----results = "hide", fig.cap = "Venn diagram showing the number of overlapping peaks for two samples", fig.small = TRUE----
 # For two samples:
 venn <- makeVennDiagram(ol, totalTest = 100,
@@ -716,7 +713,7 @@ sig_rowsums <- sapply(sig, rowSums, na.rm = TRUE)
 row_distance <- dist(sig_rowsums)
 hc <- hclust(row_distance)
 
-# user hierarchical clustering order to sort
+# use hierarchical clustering order to sort
 gr_TFs_ol_center$sort_by <- hc$order
 featureAlignedHeatmap(sig, gr_TFs_ol_center, 
                       upper.extreme = c(3, 0.5, 4),
