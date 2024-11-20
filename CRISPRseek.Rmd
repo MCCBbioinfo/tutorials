@@ -240,7 +240,8 @@ head(res$summary)
 The `r Biocpkg("CRISPRseek")` supports searching for off-targets with bulges (both RNA bulges and DNA bulges) by integrating the Cas-OFFinder [@bae2014] tool. To enable this, you can call the master function `offTargetAnalysis()` with the argument `findOffTargetsWithBulge = TRUE`. 
 
 There are three parameters specific to bulge searches, with the following default values:
-+ `method.findOffTargetsWithBulge = "CasOFFinder_v3.0.0b3"`, 
+
++ `method.findOffTargetsWithBulge = "CasOFFinder_v3.0.0b3"`
 + `DNA_bulge = 2`
 + `RNA_bulge = 2`
 
@@ -257,6 +258,7 @@ head(res$offtarget[, c("name", "gRNAPlusPAM_bulge", "OffTargetSequence_bulge", "
 ```
 
 The columns relevant to the bulge search are described below. If no bulge is detected, both the "gRNAPlusPAM_bulge" and "OffTargetSequence_bulge" columns for that row will both be empty, while the "n.RNABulge" and "n.DNABulge" values will both be 0.
+
 + "gRNAPlusPAM_bulge"
   + A hyphen ("-") indicates where a DNA bulge occurs.
 + "OffTargetSequence_bulge"
