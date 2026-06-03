@@ -9,6 +9,7 @@ Tutorials created by the Bioinformatics Core at UMass Chan Medical School (MCCB)
 | [ChIPpeakAnno](https://mccbbioinfo.github.io/tutorials/ChIPpeakAnno.html) | Annotate, visualize, and compare peak data |
 | [CRISPRseek](https://mccbbioinfo.github.io/tutorials/CRISPRseek.html) | Design of guide RNA and off-target analysis |
 | [StepReg](https://mccbbioinfo.github.io/tutorials/StepReg.html) | Stepwise regression analysis |
+| [ZhuLabTraining](https://mccbbioinfo.github.io/tutorials/ZhuLabTraining) | Zhu Lab onboard training |
 
 ## How These Tutorials Are Hosted
 
