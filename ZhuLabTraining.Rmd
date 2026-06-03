@@ -1,0 +1,225 @@
+---
+title: "Zhu Lab Onboarding & Training"
+author:
+- name: Kai Hu
+  affiliation: UMass Chan Medical School, Worcester, USA
+output:
+  BiocStyle::html_document:
+    toc_float: true
+    number_sections: true
+  BiocStyle::pdf_document: default
+link-citations: yes
+abstract: |
+  A practical onboarding guide for new members of the Zhu Lab / MCCB Bioinformatics
+  Core at UMass Chan Medical School.
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(message = FALSE,
+                      warning = FALSE,
+                      tidy = FALSE,
+                      eval = FALSE,
+                      fig.align = "center")
+```
+
+# Configuring MacBook
+Because MacBook is managed by UMass Chan IT, to install new software on it, first need to start up the "Admin By Request" app. 
+
+It is recommended to always keep the MacBook up to date with the latest software updates. It is recommended to use Time Machine to backup the MacBook regularly. You can skip the Dropbox folder when backing up the MacBook.
+
+Edit `~/.zshrc` to include personalized environment variables, aliases, etc. Below are some examples:
+```bash
+# Alias for commonly used commands
+alias openc='open -a "Google Chrome.app"'
+alias openr="open -a /Applications/RStudio.app"
+
+# Environment variables
+export sci="user.name-umw@hpc.umassmed.edu"
+export db="user_id@umwlprdzhudb02.ad.umassmed.edu"
+```
+
+# Accessing the HPCC
+The High-Performance Computing Cluster (HPCC) at UMass Chan is also called Scientific Computing for Innovation Cluster (SCI), and is managed by the HPC team. It is the primary environment for running compute- and memory-intensive bioinformatics analyses. Refer to the following [official link](https://hpc.umassmed.edu/doc/index.php?title=Welcome_to_the_Scientific_Computing_for_Innovation_Cluster) and this [Wiki page](https://hpc.umassmed.edu/wiki/index.php?title=Welcome_to_the_Scientific_Computing_for_Innovation_Cluster) for detailed information. It is recommended to read the official documentation thoroughly. Specifically, pay attention to the following topics:
+
+1. Accounts: read this [section](https://hpc.umassmed.edu/doc/index.php?title=Accounts) for obtainning an account.
+2. Connecting to SCI: the key authentication and public/private key pair are the most important topics to pay attention to. Read this [section](https://hpc.umassmed.edu/doc/index.php?title=Connecting#Key_Authentication) for more details.
+3. Graphical Web Interface (Open OnDemand): read this [page](https://hpc.umassmed.edu/wiki/index.php?title=Welcome_to_the_Scientific_Computing_for_Innovation_Cluster#Graphical_Web_Interface_(Open_OnDemand)) for how to set up a web interface to leverage the resources on the SCI.
+
+Also, read through this [presentation](docs/01_HPCC_LSF.pdf) for a more practical guidance of the LSF usage of the SCI.
+
+Other practical guidelines for using the SCI:
+
++ To transfer data to/from the SCI from/to your local machine: use `rsync` command after setting up the public/private key pair. 
++ To transfer data to/from the SCI from/to Dropbox: use `rclone` command. See "Access Dropbox" section below for more details. 
++ Need to use VPN to access the SCI and other school resources from outside the UMass Chan network. Read [this](https://umassmed.sharepoint.com/sites/information-technology/SitePages/VPN-Connect.aspx) on how to set up the VPN.
++ To request access to the HPCC space for a specific PI: email the HPCC team (Robbins, Lewis P (Lewis.Robbins@umassmed.edu), or Hull, Christopher (Chris.Hull@umassmed.edu)) while CC'ing the PI.
++ Edit `~/.bash_profile` for environment variables. Below are some examples: 
+```bash
+export shortnode="-q short -n 1 -W 4:00 -R rusage[mem=40000]"
+export longnode="-q long -n 1 -W 40:00 -R span[hosts=1] -R rusage[mem=40000]"
+export gpu='-q gpu -gpu "num=1:gmem=10000" -n 1 -W 40:00 -R rusage[mem=10000]'
+```
+
+# Accessing Dropbox
+It is higly recommended and MANDATORY, to sync all critical raw data, analyses, and results to Dropbox for easy access, backup, and sharing. Use the `rclone` command to sync data between the SCI and Dropbox. Read [this](https://meta.discourse.org/t/use-rclone-to-sync-to-dropbox-2025/378430) on how to configure and use `rclone`.
+
+It is recommended to use [Team Folders](https://help.dropbox.com/organize/team-folders) in Dropbox to organize and easy share analytical projects and the results. Contact Scott (Scott.Dziewietin@umassmed.edu) for creating a Team Folder.
+
+# Organizing Projects
+A consistent, self-documenting project layout makes analyses reproducible and easy for others to pick up. Below is a recommended directory structure template on local MacBook:
+
+```txt
+DropboxTeamFolderName/
+├── PINameA/
+│   ├── ResearcherNameA/
+│   │   ├── ProjectName1_01052025/
+│   │   ├── ProjectName2_01062026/
+│   │   └── ...
+│   └── ResearcherNameB/
+│       ├── ProjectName1_01052025/
+│       ├── ProjectName2_01062026/
+│       └── ...
+└── PINameB/
+    └── ResearcherNameC/
+        ├── ProjectName1_01052025/
+        ├── ProjectName2_01062026/
+        └── ...
+```
+
+Within each project folder, the recommended directory structure template is as follows:
+
+```txt
+ProjectName_01052025/
+├── README.md              # what the project is, notes, etc.
+├── data/
+│   ├── raw/               # original, read-only inputs (never edit in place)
+│   │   └── input_1.fastq.gz
+│   │   └── input_2.fastq.gz
+│   │   └── input_1.fastq.gz.md5 # md5 checksum of the raw data
+│   │   └── input_2.fastq.gz.md5
+│   │   └── README.md      # describe the raw data
+│   └── processed/         # cleaned/intermediate data generated by scripts
+│   │   └── processed_1.fastq.gz
+│   │   └── processed_2.fastq.gz
+│   │   └── README.md      # describe the processed data
+├── scripts/               # analysis code (R, shell, Python, etc.), pls add sufficient documentation within each script file
+│   └── 01_step1_xxx.sh    # use prefix numbers to navigate through the scripts and match script with result
+│   └── 02_step2_xxx.py   
+│   └── 03_step3_xxx.R    
+│   └── ...
+├── results/               # results generated by scripts
+│   └── 01_step1/           # results generated by 01_step1_xxx.sh
+│   └── 02_step2/           
+│   └── 03_step3/          
+│   └── ...
+├── docs/                 
+│   └── methods.docx       # documentation of the analytical steps
+│   └── reports.docx       # compiled reports of the analytical results
+│   └── notes.txt          # notes of the analytical process
+└── envs/                  # how to recreate the environment used for the project
+    |_ renv.lock           # environment specs for R scripts, optional
+    |_ conda.yaml          # environment specs for Python, R, optional for simple projects
+    |_ Dockerfile          # environment specs for Docker, optional for simple projects
+    |_ singularity.def     # environment specs for Singularity, optional for simple projects
+    |_ ...
+```
+
+When using the HPCC for a project, it is recommended to mirror your local project's folder structure on the cluster. You only need to transfer the specific files required for your analysis. Once the HPCC jobs are complete, the results must be transferred back, either to your local MacBook via `rsync` command or directly to Dropbox using `rclone` command. Because our local project folders are synced with Dropbox, both methods achieve the same end result. As a best practice, always check the `rclone` log to ensure all files transferred successfully.
+
+On HPCC, to optimize your home directory space usage, you can create a personal directory within a PI's allocated storage on the HPCC and symlink (soft-link) it to your home directory. This allows for centralized project management and easy access without consuming your limited home directory quota. Here is how to set this up via the command line:
+```bash
+# On HPCC
+  # Create a personal folder under a PI's space 
+cd /pi/nathan.lawson-umw
+mkdir YourName 
+  # Link the personal folder onto your home directory
+ln -s /pi/nathan.lawson-umw/YourName ~/PIName 
+  # Now, you can create new project folders using the recommended structure mentioned above
+cd ~/PIName/
+mkdir -p ResearcherNameD/ProjectName1_01052025
+```
+
+# Sharing scripts/results
+It is recommended to share scripts and results by leveraging the Dropbox Team Folder or by generating shared Dropbox links. GitHub repositories are also recommended for version control of your scripts and sample results, either under your personal GitHub account, or, preferably, within the MCCBbioinfo GitHub organization (https://github.com/MCCBbioinfo). Please contact Kai Hu (kai.hu@umassmed.edu) to request access to the organization.
+
+# Zhu Lab Tool Maintenance
+The Zhu Lab develops and maintains several widely used bioinformatics tools. The table below highlights a selection of them, along with their repositories, current maintainers, and maintenance notes.
+
++ MCCB department website 
+  + URL: https://mccb.umassmed.edu/
+  + Repository: https://github.com/hukai916/mccb_html
+  + Current Maintainer: Kai Hu
+
++ OneStopRNAseq 
+  + URL: https://mccb.umassmed.edu/OneStopRNAseq/
+  + Repository: https://github.com/hukai916/OneStopRNAseq/
+  + Current Maintainer: Kai Hu, Junhui Li
+  + Maintainance notes: 
+    - How to host: check this [page](https://github.com/hukai916/mccb_html/blob/main/README_app2.md) and this [page](https://github.com/hukai916/mccb_html/blob/main/README_app2_remedy.md).
+    - How to debug: check this [presentation](https://github.com/hukai916/OneStopRNAseq/blob/dev_app2/documents/how_to_debug.pptx).
+
++ Other web tools 
+  + Fly Factor Survey
+    + URL: https://mccb.umassmed.edu/ffs
+    + Current Maintainer: Kai Hu 
+  + RNAiCore 
+    + URL: https://mccb.umassmed.edu/RNAiCore
+    + Current Maintainer: Kai Hu
+  + msigdbr 
+    + URL: https://mccb.umassmed.edu/msigdbr
+    + Current Maintainer: Kai Hu
+    + Maintainance notes:
+      - Need to enable the Crontab job 
+  + Maintainance notes: check this [page](https://github.com/hukai916/mccb_html/blob/main/README_app2_remedy.md), and search for "Apps hosted on GitHub: hukai916/mccb_html" for more details.
+
++ ChIPpeakAnno: 
+  + URL: https://bioconductor.org/packages/release/bioc/html/ChIPpeakAnno.html
+  + Repository: [github.com/jianhong/ChIPpeakAnno](https://github.com/jianhong/ChIPpeakAnno)
+  + Current Maintainer: Jianhong Ou, Lihua Julie Zhu, Kai Hu, Junhui Li
+  + Maintainance notes:
+    - Push to the repository, Jianhong Ou will review and merge the changes.
+
++ CRISPRseek: 
+  + URL: https://bioconductor.org/packages/release/bioc/html/CRISPRseek.html
+  + Repository: [https://github.com/hukai916/CRISPRseek](https://github.com/LihuaJulieZhu/CRISPRseek)
+  + Current Maintainer: Kai Hu, Lihua Julie Zhu
+  + Maintainance notes:
+    - Push to the repository, Kai Hu will review and merge the changes.
+
++ StepReg: 
+  + URL: https://cran.r-project.org/package=StepReg
+  + Repository: [github.com/JunhuiLi1017/StepReg](https://github.com/JunhuiLi1017/StepReg)
+  + Current Maintainer: Junhui Li
+  + Maintainance notes:
+    - Push to the repository, Junhui Liwill review and merge the changes.
+
++ CleanUpRNAseq: 
+  + URL: https://www.bioconductor.org/packages/release/bioc/html/CleanUpRNAseq.html
+  + Repository: [github.com/haibol2016/CleanUpRNAseq](https://github.com/haibol2016/CleanUpRNAseq)
+  + Current Maintainer: Haibo Liu
+  + Maintainance notes:
+    - Push to the repository, Haibo Liu will review and merge the changes.
+
+# Getting Help
+**General IT Services**
+
++ Software, VPN, & General IT: For general IT-related questions (e.g., software installation, VPN setup), please raise a ticket with the IT Help Desk at https://umassmed.edu/it/services/helpdesk.
+
+**High-Performance Computing Cluster (HPCC / SCI)**
+
++ HPC Team Support: Contact Lewis Robbins (Lewis.Robbins@umassmed.edu) or Chris Hull (Chris.Hull@umassmed.edu).
++ Note: Please remember to CC the HPC admin team (hpc@umassmed.edu) on all correspondence per Lewis's request.
+
+**Virtual Machines (VMs)**
+
++ Web Server (umwlprdzhuapp02): Raise a ticket via the IT Help Desk or contact Andy Kress (andy.kress@umassmed.edu).
++ Database Server (umwlprdzhudb02): Contact Srinivas Gorrepati (Srinivas.Gorrepati@umassmed.edu) for access and permissions.
+
+**Cloud Storage**
+
++ Dropbox: Contact Scott Dziewietin (Scott.Dziewietin@umassmed.edu).
+
+# Session Info
+```{r session-info, eval = TRUE}
+sessionInfo()
+```
