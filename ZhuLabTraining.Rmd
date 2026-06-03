@@ -270,6 +270,27 @@ The Zhu Lab develops and maintains several widely used bioinformatics tools. The
   + Maintainance notes:
     - Push to the repository, Kai Hu will review and merge the changes.
 
++ REDseq
+  + URL: https://www.bioconductor.org/packages/release/bioc/html/REDseq.html
+  + Repository: [github.com/bioc/REDseq](https://github.com/bioc/REDseq)
+  + Current Maintainer: Julie Zhu
+  + Maintainance notes:
+    - May need to contact the maintainer for help since no dedicated repository is available.
+
++ GS-preprocess:
+  + URL: https://pubmed.ncbi.nlm.nih.gov/34127199/
+  + Repository: [github.com/umasstr/GS-Preprocess](https://github.com/umasstr/GS-Preprocess)
+  + Current Maintainer: Julie Zhu
+  + Maintainance notes:
+    - May need to contact the maintainer for help since no dedicated repository is available.
+
++ CRISPRscreen:
+  + URL: https://zenodo.org/records/14226511
+  + Repository: NA
+  + Current Maintainer: Julie Zhu
+  + Maintainance notes:
+    - May need to contact the maintainer for help since no dedicated repository is available.
+
 # Getting Help
 **General IT Services**
 
