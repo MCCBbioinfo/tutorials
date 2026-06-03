@@ -200,6 +200,76 @@ The Zhu Lab develops and maintains several widely used bioinformatics tools. The
   + Maintainance notes:
     - Push to the repository, Haibo Liu will review and merge the changes.
 
++ GUIDEseq: 
+  + URL: https://www.bioconductor.org/packages/release/bioc/html/GUIDEseq.html
+  + Repository: [github.com/LihuaJulieZhu/GUIDEseq](https://github.com/LihuaJulieZhu/GUIDEseq)
+  + Current Maintainer: Julie Zhu
+  + Maintainance notes:
+    - Push to the repository, Julie Zhu will review and merge the changes.
+
++ ATACseqQC: 
+  + URL: https://www.bioconductor.org/packages/release/bioc/html/ATACseqQC.html
+  + Repository: [github.com/jianhong/ATACseqQC](https://github.com/jianhong/ATACseqQC)
+  + Current Maintainer: Jianhong Ou
+  + Maintainance notes:
+    - Push to the repository, Jianhong Ou will review and merge the changes.
+
++ dagLogo: 
+  + URL: https://www.bioconductor.org/packages/release/bioc/html/dagLogo.html
+  + Repository: [github.com/jianhong/dagLogo](https://github.com/jianhong/dagLogo)
+  + Current Maintainer: Jianhong Ou
+  + Maintainance notes:
+    - Push to the repository, Jianhong Ou will review and merge the changes.
+
++ trackViewer: 
+  + URL: https://bioconductor.org/packages/release/bioc/html/trackViewer.html
+  + Repository: [github.com/jianhong/trackViewer](https://github.com/jianhong/trackViewer)
+  + Current Maintainer: Jianhong Ou
+  + Maintainance notes:
+    - Push to the repository, Jianhong Ou will review and merge the changes.
+
++ motifStack: 
+  + URL: https://www.bioconductor.org/packages/release/bioc/html/motifStack.html
+  + Repository: [github.com/jianhong/motifStack](https://github.com/jianhong/motifStack)
+  + Current Maintainer: Jianhong Ou
+  + Maintainance notes:
+    - Push to the repository, Jianhong Ou will review and merge the changes.
+
++ InPAS: 
+  + URL: https://www.bioconductor.org/packages/release/bioc/html/InPAS.html
+  + Repository: [github.com/jianhong/InPAS](https://github.com/jianhong/InPAS)
+  + Current Maintainer: Jianhong Ou
+  + Maintainance notes:
+    - Push to the repository, Jianhong Ou will review and merge the changes.
+
++ NADseq: 
+  + URL: https://www.bioconductor.org/packages/release/bioc/html/NADfinder.html
+  + Repository: [github.com/hukai916/NADseq](https://github.com/LihuaJulieZhu/NADfinder)
+  + Current Maintainer: Julie Zhu
+  + Maintainance notes:
+    - Push to the repository, Julie Zhu will review and merge the changes.
+
++ cleanUpdTseq: 
+  + URL: https://github.com/bioc/cleanUpdTSeq/tree/devel
+  + Repository: [github.com/bioc/cleanUpdTSeq](https://github.com/bioc/cleanUpdTSeq/tree/devel)
+  + Current Maintainer: Jianhong Ou, Julie Zhu
+  + Maintainance notes:
+    - Push to the repository, Jianhong Ou and Julie Zhu will review and merge the changes.
+
++ C-COUNT: 
+  + URL: https://www.exphem.org/article/S0301-472X(25)00077-3/abstract
+  + Repository: [github.com/radio1988/c-count](https://github.com/radio1988/c-count)
+  + Current Maintainer: Rui Li
+  + Maintainance notes:
+    - Push to the repository, Rui Li will review and merge the changes.
+  
++ scATACpipe:
+  + URL: https://www.frontiersin.org/journals/cell-and-developmental-biology/articles/10.3389/fcell.2022.981859/full
+  + Repository: [github.com/hukai916/scATACpipe](https://github.com/hukai916/scATACpipe)
+  + Current Maintainer: Kai Hu
+  + Maintainance notes:
+    - Push to the repository, Kai Hu will review and merge the changes.
+
 # Getting Help
 **General IT Services**
 
