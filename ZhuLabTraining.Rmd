@@ -65,6 +65,17 @@ It is higly recommended and MANDATORY, to sync all critical raw data, analyses, 
 
 It is recommended to use [Team Folders](https://help.dropbox.com/organize/team-folders) in Dropbox to organize and easy share analytical projects and the results. Contact Scott (Scott.Dziewietin@umassmed.edu) for creating a Team Folder.
 
+# Accessing AI tools 
+Commercial AI tools such as ChatGPT and Gemini may expose sensitive data or confidential information to the public. Therefore, do **NOT** upload sensitive or restricted data to these platforms. Instead, consider using simulated or de-identified data when testing ideas or generating code/scripts. 
+
+For secure and institution-approved options, you can use the following UMass Chan resources:
+
+ + [UMass Chan AI Commons](https://umassmed.sharepoint.com/sites/UMassChanAICommons/SitePages/AI-Commons-Home.aspx): A centralized hub providing guidance, training, and access to approved AI tools across research, education, and administration.
+ + [UMass Chan Chat](https://aichat.umassmed.edu/): A secure, institution-specific chat platform designed for general AI use.
+
+Regarding GitHub Copilot: as a bioinformatics researcher at UMass Chan, you are eligible to sign up for a free GitHub Copilot Pro account using your institutional badge.
+Please refer to this [link](https://docs.github.com/en/copilot/how-tos/copilot-on-github/set-up-copilot/enable-copilot/set-up-for-teachers-and-os-maintainers) for detailed instructions.
+
 # Organizing Projects
 A consistent, self-documenting project layout makes analyses reproducible and easy for others to pick up. Below is a recommended directory structure template on local MacBook:
 

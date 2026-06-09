@@ -10,7 +10,7 @@
 
 
 
-<meta name="date" content="2026-06-03" />
+<meta name="date" content="2026-06-09" />
 
 <title>Zhu Lab Onboarding &amp; Training</title>
 
@@ -1838,7 +1838,7 @@ function toggle_visibility(id1) {
 <h1 class="title toc-ignore">Zhu Lab Onboarding &amp; Training</h1>
 <p class="author-name">Kai Hu<span class="affil-mark">1</span></p>
 <p class="author-affiliation"><span class="affil-mark">1</span>UMass Chan Medical School, Worcester, USA</p>
-<h4 class="date">3 June 2026</h4>
+<h4 class="date">9 June 2026</h4>
 <h4 class="abstract">Abstract</h4>
 <p>A practical onboarding guide for new members of the Zhu Lab / MCCB Bioinformatics
 Core at UMass Chan Medical School.</p>
@@ -1885,8 +1885,19 @@ export gpu=&#39;-q gpu -gpu &quot;num=1:gmem=10000&quot; -n 1 -W 40:00 -R rusage
 <p>It is higly recommended and MANDATORY, to sync all critical raw data, analyses, and results to Dropbox for easy access, backup, and sharing. Use the <code>rclone</code> command to sync data between the SCI and Dropbox. Read <a href="https://meta.discourse.org/t/use-rclone-to-sync-to-dropbox-2025/378430">this</a> on how to configure and use <code>rclone</code>.</p>
 <p>It is recommended to use <a href="https://help.dropbox.com/organize/team-folders">Team Folders</a> in Dropbox to organize and easy share analytical projects and the results. Contact Scott (<a href="mailto:Scott.Dziewietin@umassmed.edu" class="email">Scott.Dziewietin@umassmed.edu</a>) for creating a Team Folder.</p>
 </div>
-<div id="organizing-projects" class="section level1" number="4">
-<h1><span class="header-section-number">4</span> Organizing Projects</h1>
+<div id="accessing-ai-tools" class="section level1" number="4">
+<h1><span class="header-section-number">4</span> Accessing AI tools</h1>
+<p>Commercial AI tools such as ChatGPT and Gemini may expose sensitive data or confidential information to the public. Therefore, do <strong>NOT</strong> upload sensitive or restricted data to these platforms. Instead, consider using simulated or de-identified data when testing ideas or generating code/scripts.</p>
+<p>For secure and institution-approved options, you can use the following UMass Chan resources:</p>
+<ul>
+<li><a href="https://umassmed.sharepoint.com/sites/UMassChanAICommons/SitePages/AI-Commons-Home.aspx">UMass Chan AI Commons</a>: A centralized hub providing guidance, training, and access to approved AI tools across research, education, and administration.</li>
+<li><a href="https://aichat.umassmed.edu/">UMass Chan Chat</a>: A secure, institution-specific chat platform designed for general AI use.</li>
+</ul>
+<p>Regarding GitHub Copilot: as a bioinformatics researcher at UMass Chan, you are eligible to sign up for a free GitHub Copilot Pro account using your institutional badge.
+Please refer to this <a href="https://docs.github.com/en/copilot/how-tos/copilot-on-github/set-up-copilot/enable-copilot/set-up-for-teachers-and-os-maintainers">link</a> for detailed instructions.</p>
+</div>
+<div id="organizing-projects" class="section level1" number="5">
+<h1><span class="header-section-number">5</span> Organizing Projects</h1>
 <p>A consistent, self-documenting project layout makes analyses reproducible and easy for others to pick up. Below is a recommended directory structure template on local MacBook:</p>
 <pre class="txt"><code>DropboxTeamFolderName/
 ├── PINameA/
@@ -1949,12 +1960,12 @@ ln -s /pi/nathan.lawson-umw/YourName ~/PIName
 cd ~/PIName/
 mkdir -p ResearcherNameD/ProjectName1_01052025</code></pre>
 </div>
-<div id="sharing-scriptsresults" class="section level1" number="5">
-<h1><span class="header-section-number">5</span> Sharing scripts/results</h1>
+<div id="sharing-scriptsresults" class="section level1" number="6">
+<h1><span class="header-section-number">6</span> Sharing scripts/results</h1>
 <p>It is recommended to share scripts and results by leveraging the Dropbox Team Folder or by generating shared Dropbox links. GitHub repositories are also recommended for version control of your scripts and sample results, either under your personal GitHub account, or, preferably, within the MCCBbioinfo GitHub organization (<a href="https://github.com/MCCBbioinfo" class="uri">https://github.com/MCCBbioinfo</a>). Please contact Kai Hu (<a href="mailto:kai.hu@umassmed.edu" class="email">kai.hu@umassmed.edu</a>) to request access to the organization.</p>
 </div>
-<div id="zhu-lab-tool-maintenance" class="section level1" number="6">
-<h1><span class="header-section-number">6</span> Zhu Lab Tool Maintenance</h1>
+<div id="zhu-lab-tool-maintenance" class="section level1" number="7">
+<h1><span class="header-section-number">7</span> Zhu Lab Tool Maintenance</h1>
 <p>The Zhu Lab develops and maintains several widely used bioinformatics tools. The table below highlights a selection of them, along with their repositories, current maintainers, and maintenance notes.</p>
 <ul>
 <li>MCCB department website
@@ -2169,8 +2180,8 @@ mkdir -p ResearcherNameD/ProjectName1_01052025</code></pre>
 </ul></li>
 </ul>
 </div>
-<div id="getting-help" class="section level1" number="7">
-<h1><span class="header-section-number">7</span> Getting Help</h1>
+<div id="getting-help" class="section level1" number="8">
+<h1><span class="header-section-number">8</span> Getting Help</h1>
 <p><strong>General IT Services</strong></p>
 <ul>
 <li>Software, VPN, &amp; General IT: For general IT-related questions (e.g., software installation, VPN setup), please raise a ticket with the IT Help Desk at <a href="https://umassmed.edu/it/services/helpdesk" class="uri">https://umassmed.edu/it/services/helpdesk</a>.</li>
@@ -2190,8 +2201,8 @@ mkdir -p ResearcherNameD/ProjectName1_01052025</code></pre>
 <li>Dropbox: Contact Scott Dziewietin (<a href="mailto:Scott.Dziewietin@umassmed.edu" class="email">Scott.Dziewietin@umassmed.edu</a>).</li>
 </ul>
 </div>
-<div id="session-info" class="section level1" number="8">
-<h1><span class="header-section-number">8</span> Session Info</h1>
+<div id="session-info" class="section level1" number="9">
+<h1><span class="header-section-number">9</span> Session Info</h1>
 <pre class="r"><code>sessionInfo()</code></pre>
 <pre><code>## R version 4.5.3 (2026-03-11)
 ## Platform: aarch64-apple-darwin20
