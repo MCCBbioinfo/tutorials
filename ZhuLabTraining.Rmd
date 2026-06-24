@@ -38,6 +38,9 @@ export sci="user.name-umw@hpc.umassmed.edu"
 export db="user_id@umwlprdzhudb02.ad.umassmed.edu"
 ```
 
+# Accessing MCCB Shared resources 
+The Zhu Lab has a shared Dropbox folder named `BioinformaticsResources/` that contains MCCB bionformatics resources. It can be at accessed [here](https://www.dropbox.com/scl/fo/m5s0i4p0an4hyqybne23r/AIWsuuwCHoQJupH__48CVFg?rlkey=ucreensumrxm3qhcjcem6v481&st=65sbb54n&dl=0). The subfolder `Seminar/` stores the seminar materials and slides for each lab meeting.
+
 # Accessing the HPCC
 The High-Performance Computing Cluster (HPCC) at UMass Chan is also called Scientific Computing for Innovation Cluster (SCI), and is managed by the HPC team. It is the primary environment for running compute- and memory-intensive bioinformatics analyses. Refer to the following [official link](https://hpc.umassmed.edu/doc/index.php?title=Welcome_to_the_Scientific_Computing_for_Innovation_Cluster) and this [Wiki page](https://hpc.umassmed.edu/wiki/index.php?title=Welcome_to_the_Scientific_Computing_for_Innovation_Cluster) for detailed information. It is recommended to read the official documentation thoroughly. Specifically, pay attention to the following topics:
 
