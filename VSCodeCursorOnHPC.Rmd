@@ -1,0 +1,278 @@
+---
+title: "VS Code and Cursor on HPC"
+author:
+- name: MCCB Bioinformatics Core
+  affiliation: UMass Chan Medical School, Worcester, USA
+output:
+  BiocStyle::html_document:
+    toc: true
+    toc_float: true
+    number_sections: true
+abstract: |
+  A practical guide for running VS Code or Cursor directly on an HPC compute
+  node through remote tunnels, plus recommended extensions for Python, R,
+  notebooks, and agentic coding.
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  message = FALSE,
+  warning = FALSE,
+  tidy = FALSE,
+  eval = FALSE
+)
+```
+
+# Overview
+
+VS Code and Cursor can both connect to the HPC login node over SSH, but that is
+not enough for interactive work that should run on a compute node. If you SSH to
+the login node from the editor and then request an interactive session from the
+editor terminal, only that terminal moves to the compute node. The editor server,
+extensions, language servers, and coding agents remain on the login node.
+
+To make the full editor session run on a compute node, start a remote tunnel from
+inside an LSF compute job, then connect your local editor to that tunnel. The
+commands below request a long interactive-style job for the tunnel. Adjust CPU,
+memory, queue, and wall time as needed, especially for heavier analyses.
+
+# Connect VS Code to a compute node
+
+First SSH to the HPC login node from your local terminal:
+
+```{bash}
+ssh <username>@hpc.umassmed.edu
+```
+
+Submit an LSF job that logs in to VS Code tunnels and keeps the tunnel alive:
+
+```{bash}
+bsub -q long -n 4 -R rusage[mem=10G] -W 24:00 "echo '' | /share/bin/code tunnel user login --provider microsoft && while true; do /share/bin/code tunnel; sleep 5; done"
+```
+
+After submission, LSF prints a job ID. Watch the tunnel output with:
+
+```{bash}
+bpeek <job_id>
+```
+
+The output will show a browser link and a one-time code. Open the link locally,
+enter the code, and authenticate with your Microsoft account.
+
+On your local machine:
+
+1. Open VS Code.
+2. Install the **Remote - Tunnels** extension from the Extensions marketplace.
+3. Open the command palette with `Command + Shift + P`.
+4. Run **Remote-Tunnels: Connect to Tunnel**.
+5. Choose **Microsoft account**.
+6. Select the node name marked **Online**.
+
+After the connection opens, the VS Code server, terminal, extensions, notebooks,
+and agents are running on the compute node allocated by LSF.
+
+# Connect Cursor to a compute node
+
+Cursor uses almost the same workflow as VS Code, but requires a few setup steps
+before the first tunnel session.
+
+## Install the Remote Server extension in Cursor
+
+Download the VSIX package for the Microsoft remote server extension:
+
+<https://marketplace.visualstudio.com/_apis/public/gallery/publishers/ms-vscode/vsextensions/remote-server/latest/vspackage>
+
+Then install it in Cursor:
+
+1. Open the Cursor command palette with `Ctrl + Shift + P`.
+2. Search for `VSIX`.
+3. Choose **Extensions: Install from VSIX**.
+4. Select the downloaded `.vsix` file.
+
+## Install the Cursor CLI on HPC
+
+SSH to the HPC login node from your local terminal:
+
+```{bash}
+ssh <username>@hpc.umassmed.edu
+```
+
+Download and unpack the Cursor CLI:
+
+```{bash}
+curl -Lk "https://api2.cursor.sh/updates/download-latest?os=cli-alpine-x64" --output cursor_cli.tar.gz
+tar -xzf cursor_cli.tar.gz
+```
+
+Add the directory containing the `cursor` executable to your `PATH`. For example,
+if the executable is in your home directory:
+
+```{bash}
+echo 'export PATH="$HOME:$PATH"' >> ~/.bashrc
+source ~/.bashrc
+```
+
+Confirm that the CLI is available:
+
+```{bash}
+which cursor
+cursor --help
+```
+
+## Start a Cursor tunnel job
+
+Submit the tunnel job from the HPC login node:
+
+```{bash}
+bsub -q long -n 4 -R rusage[mem=10G] -W 24:00 "echo '' | ~/cursor tunnel user login --provider microsoft && while true; do ~/cursor tunnel; sleep 5; done"
+```
+
+Check the job output:
+
+```{bash}
+bpeek <job_id>
+```
+
+Open the displayed link locally, enter the code, and authenticate with your
+Microsoft account. Then connect from Cursor using the same tunnel workflow as
+VS Code: open the command palette, run **Connect to Tunnel**, choose your
+Microsoft account, and select the compute node marked **Online**.
+
+# Useful extensions
+
+Install extensions separately in every place where you use the editor. A local
+VS Code or Cursor install and a remote HPC tunnel session have separate extension
+sets.
+
+## Agentic coding
+
+For VS Code, UMass Chan users may be eligible for free GitHub Copilot Pro through
+GitHub Education. Follow GitHub's instructions for teachers and maintainers:
+
+<https://docs.github.com/en/copilot/how-tos/copilot-on-github/set-up-copilot/enable-copilot/set-up-for-teachers-and-os-maintainers>
+
+After authorization:
+
+1. Install **GitHub Copilot Chat** from the VS Code marketplace.
+2. Sign in with your GitHub account.
+3. Use the Copilot Chat agent interface from the side panel.
+
+You can also install the **Codex** extension to connect your ChatGPT account for
+agentic coding.
+
+Repository-specific agent instructions can help agents follow project standards:
+
+<https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/add-custom-instructions/add-repository-instructions#creating-path-specific-custom-instructions>
+
+## Python and Jupyter notebooks
+
+Recommended extensions:
+
+1. **Python Extension Pack**
+2. **Pylance**
+3. **Jupyter**
+
+Register a project-specific Jupyter kernel from the active conda environment:
+
+```{bash}
+python -m ipykernel install \
+  --user \
+  --name "$PROJECT" \
+  --display-name "Python (${PROJECT})"
+```
+
+## R interactive work
+
+Recommended extension:
+
+1. **R**
+
+For an RStudio-like workflow, create a conda environment with R, language server
+support, HTTP graphics, notebook support, and common analysis packages.
+
+Create `envs/conda.yaml`:
+
+```{bash}
+mkdir -p envs
+cat > envs/conda.yaml <<EOF
+name: ${PROJECT}
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - python=3.12
+  - r-base
+  - r-languageserver
+  - r-httpgd
+  - r-irkernel
+  - r-jsonlite
+  - r-httpuv
+  - r-styler
+  - r-lintr
+  - jupyterlab
+  - notebook
+  - ipykernel
+  - nbformat
+  - jupyter_server
+  - pandas
+  - numpy
+  - scipy
+  - matplotlib
+  - psutil
+  - nodejs=20
+EOF
+```
+
+Create and activate the environment:
+
+```{bash}
+mamba env create -f envs/conda.yaml
+mamba activate "$PROJECT"
+```
+
+Optionally register an R kernel for Jupyter notebooks:
+
+```{bash}
+R -e 'IRkernel::installspec(name=Sys.getenv("CONDA_DEFAULT_ENV"), displayname=paste0("R (", Sys.getenv("CONDA_DEFAULT_ENV"), ")"))'
+```
+
+To use R interactively in VS Code or Cursor:
+
+1. Install the R extension in the editor session where you will work.
+2. Open the command palette and run **Create R Terminal**.
+3. Open an R script.
+4. Open the R panel from the side bar.
+5. Start HTTP graphics in the R session:
+
+```{r}
+library(httpgd)
+hgd()
+```
+
+Select lines in the R script and press `Command + Enter` to run them. Variables
+can be inspected from the R pane, and figures appear in separate panes.
+
+## Extra extensions
+
+These extensions are useful for common project work:
+
+1. **Docker**
+2. **EditorConfig**
+3. **GitHub Pull Requests**
+4. **Live Server**
+5. **Live Share**
+6. **R Debugger**
+7. **Python Debugger**
+8. **Python Environments**
+9. **R Syntax**
+10. **Rainbow CSV**
+11. **Remote Development**
+12. **YAML**
+13. **SQLite3 Editor**
+
+# Practical notes
+
+Use tunnels only for active work, and stop the LSF job when you are finished so
+the compute node is released. The tunnel job controls the compute resources
+available to the editor session, so request enough memory, CPU, and wall time for
+the analysis you plan to run.
