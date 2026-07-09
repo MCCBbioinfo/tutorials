@@ -39,7 +39,7 @@ This article walks through a typical workflow: obtaining the package source, rec
 
 # Obtain the package source code
 
-If a GitHub repository for the package exists, ask the original developer to add you as a collaborator so you can push changes to the repository directly. Otherewise, you can fork it too. This GitHub repo should be synced with the Bioconductor git repository. Note that Bioconductor runs its own git server at `git.bioconductor.org`, which is separate from GitHub. Typically, developers work on their GitHub repo and push the changes to the Bioconductor git repository during each release cycle.
+If a GitHub repository for the package exists, ask the original developer to add you as a collaborator so you can push changes to the repository directly. Otherwise, you can fork it too. This GitHub repo should be synced with the Bioconductor git repository. Note that Bioconductor runs its own git server at `git.bioconductor.org`, which is separate from GitHub. Typically, developers work on their GitHub repo and push the changes to the Bioconductor git repository during each release cycle.
 
 To pull from and push to the Bioconductor git repository, you need SSH access managed through the [BiocCredentials application](https://git.bioconductor.org/BiocCredentials/), which is independent of your GitHub account. You can verify your access with the following command:
 ```{bash, eval = FALSE}
