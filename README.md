@@ -10,6 +10,7 @@ Tutorials created by the Bioinformatics Core at UMass Chan Medical School (MCCB)
 | [CRISPRseek](https://mccbbioinfo.github.io/tutorials/CRISPRseek.html) | Design of guide RNA and off-target analysis |
 | [StepReg](https://mccbbioinfo.github.io/tutorials/StepReg.html) | Stepwise regression analysis |
 | [ZhuLabTraining](https://mccbbioinfo.github.io/tutorials/ZhuLabTraining) | Zhu Lab onboard training |
+| [HowToMaintainBioconductorPackages](https://mccbbioinfo.github.io/tutorials/HowToMaintainBioconductorPackages) | Practical guidelines on how to maintain Bioconductor packages |
 
 ## How These Tutorials Are Hosted
 
