@@ -11,6 +11,7 @@ Tutorials created by the Bioinformatics Core at UMass Chan Medical School (MCCB)
 | [StepReg](https://mccbbioinfo.github.io/tutorials/StepReg.html) | Stepwise regression analysis |
 | [ZhuLabTraining](https://mccbbioinfo.github.io/tutorials/ZhuLabTraining) | Zhu Lab onboard training |
 | [HowToMaintainBioconductorPackages](https://mccbbioinfo.github.io/tutorials/HowToMaintainBioconductorPackages) | Practical guidelines on how to maintain Bioconductor packages |
+| [VSCodeCursorOnHPC](https://mccbbioinfo.github.io/tutorials/VSCodeCursorOnHPC.html) | Use VS Code or Cursor on an HPC compute node through remote tunnels |
 
 ## How These Tutorials Are Hosted
 
