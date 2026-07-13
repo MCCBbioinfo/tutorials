@@ -10,7 +10,7 @@
 
 
 
-<meta name="date" content="2026-07-09" />
+<meta name="date" content="2026-07-13" />
 
 <title>VS Code and Cursor on HPC</title>
 
@@ -1838,7 +1838,7 @@ function toggle_visibility(id1) {
 <h1 class="title toc-ignore">VS Code and Cursor on HPC</h1>
 <p class="author-name">MCCB Bioinformatics Core (Yaro Markov)<span class="affil-mark">1</span></p>
 <p class="author-affiliation"><span class="affil-mark">1</span>UMass Chan Medical School, Worcester, USA</p>
-<h4 class="date">9 July 2026</h4>
+<h4 class="date">13 July 2026</h4>
 <h4 class="abstract">Abstract</h4>
 <p>A practical guide for running VS Code or Cursor directly on an HPC compute
 node through remote tunnels, plus recommended extensions for Python, R,
@@ -2001,10 +2001,30 @@ EOF</code></pre>
 mamba activate &quot;$PROJECT&quot;</code></pre>
 <p>Optionally register an R kernel for Jupyter notebooks:</p>
 <pre class="bash"><code>R -e &#39;IRkernel::installspec(name=Sys.getenv(&quot;CONDA_DEFAULT_ENV&quot;), displayname=paste0(&quot;R (&quot;, Sys.getenv(&quot;CONDA_DEFAULT_ENV&quot;), &quot;)&quot;))&#39;</code></pre>
+<p>In VS Code, open the command palette, run <strong>Preferences: Open User Settings
+(JSON)</strong>, and add:</p>
+<pre class="json"><code>{
+  &quot;r.rpath.linux&quot;: &quot;R&quot;,
+  &quot;r.alwaysUseActiveTerminal&quot;: true,
+  &quot;r.sessionWatcher&quot;: true
+}</code></pre>
+<p>On HPC, add the following to <code>~/.Rprofile</code>:</p>
+<pre class="r"><code>if (interactive() &amp;&amp; Sys.getenv(&quot;RSTUDIO&quot;) == &quot;&quot;) {
+  source(file.path(
+    Sys.getenv(if (.Platform$OS.type == &quot;windows&quot;) &quot;USERPROFILE&quot; else &quot;HOME&quot;),
+    &quot;.vscode-R&quot;,
+    &quot;init.R&quot;
+  ))
+}</code></pre>
+<p>With this configuration, VS Code launches R from the active terminal. That means
+you can activate any conda environment first, then start R directly from the VS
+Code terminal and use that environment’s <code>R</code>. Otherwise, set <code>r.rpath.linux</code> in
+the VS Code user settings to the exact path of the conda environment’s R
+executable.</p>
 <p>To use R interactively in VS Code or Cursor:</p>
 <ol style="list-style-type: decimal">
 <li>Install the R extension in the editor session where you will work.</li>
-<li>Open the command palette and run <strong>Create R Terminal</strong>.</li>
+<li>Activate your project conda environment and launch R..</li>
 <li>Open an R script.</li>
 <li>Open the R panel from the side bar.</li>
 <li>Start HTTP graphics in the R session:</li>

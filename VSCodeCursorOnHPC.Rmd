@@ -1,7 +1,7 @@
 ---
 title: "VS Code and Cursor on HPC"
 author:
-- name: MCCB Bioinformatics Core
+- name: MCCB Bioinformatics Core (Yaro Markov)
   affiliation: UMass Chan Medical School, Worcester, USA
 output:
   BiocStyle::html_document:
@@ -236,10 +236,39 @@ Optionally register an R kernel for Jupyter notebooks:
 R -e 'IRkernel::installspec(name=Sys.getenv("CONDA_DEFAULT_ENV"), displayname=paste0("R (", Sys.getenv("CONDA_DEFAULT_ENV"), ")"))'
 ```
 
+In VS Code, open the command palette, run **Preferences: Open User Settings
+(JSON)**, and add:
+
+```json
+{
+  "r.rpath.linux": "R",
+  "r.alwaysUseActiveTerminal": true,
+  "r.sessionWatcher": true
+}
+```
+
+On HPC, add the following to `~/.Rprofile`:
+
+```{r}
+if (interactive() && Sys.getenv("RSTUDIO") == "") {
+  source(file.path(
+    Sys.getenv(if (.Platform$OS.type == "windows") "USERPROFILE" else "HOME"),
+    ".vscode-R",
+    "init.R"
+  ))
+}
+```
+
+With this configuration, VS Code launches R from the active terminal. That means
+you can activate any conda environment first, then start R directly from the VS
+Code terminal and use that environment's `R`. Otherwise, set `r.rpath.linux` in
+the VS Code user settings to the exact path of the conda environment's R
+executable.
+
 To use R interactively in VS Code or Cursor:
 
 1. Install the R extension in the editor session where you will work.
-2. Open the command palette and run **Create R Terminal**.
+2. Activate your project conda environment and launch R.
 3. Open an R script.
 4. Open the R panel from the side bar.
 5. Start HTTP graphics in the R session:
